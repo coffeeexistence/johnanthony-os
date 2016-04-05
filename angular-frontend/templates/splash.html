@@ -1,0 +1,21 @@
+<div class="vertical-center text-center">
+
+
+
+
+  <div class="loader-container white-text row">
+    <div class="row">
+      <div class="col s12 center-align">
+        John Anthony
+      </div>
+    </div>
+
+    <div class="row">
+      <div ng-repeat="circle in splash.circles" class="circle">
+        <img src="img/splash/on.png" class='loading-circle' ng-show="splash.isActive($index)">
+        <img src="img/splash/off.png" class='loading-circle' ng-show="!splash.isActive($index)">
+      </div>
+    </div>
+  </div>
+
+</div>
