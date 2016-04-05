@@ -7,13 +7,14 @@
   background-color: #0B1436;
 }
 
+
 .white-text {
   color: white;
 }
 
 .loader-container {
   width: 100%;
-  max-width: 500px;
+  max-width: 450px;
 
   margin-left: auto;
   margin-right: auto;
