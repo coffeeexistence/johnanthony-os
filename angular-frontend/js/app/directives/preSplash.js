@@ -175,8 +175,10 @@ var messages = [
 ];
 
 
-var preSplashController = function($interval, $rootScope, $window) {
+var preSplashController = function($timeout, $rootScope, $window) {
   var preSplash = this;
+
+  $rootScope.$emit('changeBodyBackground', '#000000');
 
   preSplash.messagesArray = messages;
   preSplash.messageIndex = 0;
@@ -185,20 +187,17 @@ var preSplashController = function($interval, $rootScope, $window) {
   preSplash.nextMessage = function() {
     if(preSplash.messageIndex < preSplash.messagesArray.length-1){
       preSplash.messageIndex++;
-      preSplash.checkHeight();
+      $timeout(preSplash.nextMessage, preSplash.logInterval());
     } else {
       console.log('finshed');
+      $rootScope.$emit('nextStage');
     }
   };
 
   var window = $window;
-  preSplash.checkHeight = function(){
-
-    //debugger;
-  }
 
   preSplash.logInterval = function(){
-    return Math.floor(Math.random()*1000);
+    return Math.floor(Math.random()*85);
   };
 
   preSplash.active = function(index){
@@ -212,10 +211,10 @@ var preSplashController = function($interval, $rootScope, $window) {
     } else { return 10; }
   }
 
-  // preSplash.addMessage
-  // var updatePromise =
-  $interval(preSplash.nextMessage, 100);
 
+  $timeout(preSplash.nextMessage, 200);
+
+  //setTimeout(myFunction, 3000)
 
 }
 
@@ -228,7 +227,7 @@ function preSplash() {
       '<div ng-repeat="message in preSplash.messagesArray" ng-if="preSplash.active($index);" class="boot-message">{{message}}</div>',
       '</div>'
     ].join(''),
-		controller: ['$interval', '$rootScope', '$window', preSplashController],
+		controller: ['$timeout', '$rootScope', '$window', preSplashController],
 		controllerAs: 'preSplash',
 		link: function(){
 

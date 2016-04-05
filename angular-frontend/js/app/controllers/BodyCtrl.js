@@ -4,10 +4,15 @@ angular
   .controller('BodyCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
     var vm = this;
     vm.stage = 0;
+    vm.totalStages = 2;
     $scope.bodyStyle = {};
 
     vm.nextStage = function(){
-      vm.stage++;
+      if(vm.stage < vm.totalStages-1) {
+        vm.stage++
+      } else {
+        console.log('no more stages');
+      }
     }
 
     $rootScope.$on('changeBodyBackground', function (event, data) {
